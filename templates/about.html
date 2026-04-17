@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}{{ trans.about.title }} - Portfolio{% endblock %}
+
+{% block content %}
+<h1>{{ trans.about.about_me }}</h1>
+
+<div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
+    <div style="flex: 1; min-width: 300px;">
+        <img src="{{ url_for('static', filename='photos/me.jpeg') }}" alt="Profile picture" style="width: 100%; max-width: 300px; border-radius: 50%; margin-bottom: 1rem;">
+    </div>
+    <div style="flex: 2; min-width: 300px;">
+        <h2>Hi, I'm Batbayar Enkhbaatar</h2>
+        <p>I'm a Full Stack developer and research engineer with 10+ years of experience in software development, robotics, AI, and cloud technologies. I specialize in building scalable APIs, integrating complex systems, and leading innovative projects in robotics and data engineering.</p>
+        <p>My journey in tech has taken me from system engineering in Mongolia to advanced research in South Korea and Canada, focusing on cutting-edge technologies like ROS2, SLAM, and cloud architectures.</p>
+    </div>
+</div>
+
+<section style="margin-top: 3rem;">
+    <h2>{{ trans.about.skills }}</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px;">
+            <h3>{{ trans.about.backend }}</h3>
+            <p>{{ trans.about.backend_desc }}</p>
+        </div>
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px;">
+            <h3>{{ trans.about.robotics }}</h3>
+            <p>{{ trans.about.robotics_desc }}</p>
+        </div>
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px;">
+            <h3>{{ trans.about.devops }}</h3>
+            <p>{{ trans.about.devops_desc }}</p>
+        </div>
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px;">
+            <h3>{{ trans.about.languages_skills }}</h3>
+            <p>{{ trans.about.languages_skills_desc }}</p>
+        </div>
+    </div>
+</section>
+
+<section style="margin-top: 3rem;">
+    <h2>{{ trans.about.experience }}</h2>
+    <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+        <h3>{{ trans.about.senior_researcher }}</h3>
+        <p><em>4DiViSION, South Korea — Dec 2023 - Present</em></p>
+        <p>Built APIs for data integration with SLAM and navigation modules, ensuring security, performance, and scalability. Collaborated with cross-disciplinary teams to integrate mapping and localization data into decision-making workflows. Technologies: ROS2, Ubuntu, Cartographer, SLAM, Nav2, Python, C++, Git, CI/CD.</p>
+    </div>
+    <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+        <h3>{{ trans.about.scientist_mila }}</h3>
+        <p><em>Mila Quebec AI, Montreal Canada — June 2024 - Sep 2024</em></p>
+        <p>Developed physical-AI models for robotics using Gazebo, ROS2, Python, and C++. Optimized middleware communication and implemented secure data pipelines for reinforcement learning experiments.</p>
+    </div>
+    <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+        <h3>{{ trans.about.backend_engineer }}</h3>
+        <p><em>CO2NETWORK INC, South Korea — Nov 2022 - Sep 2023</em></p>
+        <p>Structured a DID-blockchain backend in AWS cloud for a tokenized trading platform. Designed and maintained RESTful and GraphQL APIs for multi-source data integration. Implemented AWS-based DevOps pipeline, including ECS, Lambda, EC2, and load balancers, with a focus on secure data transactions. Technologies: Node.js, PHP, React, GraphQL, AWS ECS, Lambda, EC2, RDS, DynamoDB, SQL Server, PostgreSQL.</p>
+    </div>
+    <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+        <h3>{{ trans.about.data_engineer }}</h3>
+        <p><em>North Star Consulting, South Korea — Aug 2021 - Oct 2022</em></p>
+        <p>Architected data pipelines for ML models on AWS and GCP using Apache Airflow, BigQuery, DynamoDB, TensorFlow, SageMaker. Managed monitoring and visualization with Grafana, Prometheus, and Superset.</p>
+    </div>
+    <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px;">
+        <h3>{{ trans.about.system_engineer }}</h3>
+        <p><em>Univision LLC, Mongolia — May 2010 - Aug 2019</em></p>
+        <p>Led infrastructure projects for IPTV, VoIP, and OTT platforms, implementing secure and scalable server systems. Managed Linux-based systems, network security, and customer support.</p>
+    </div>
+</section>
+
+<section style="margin-top: 3rem;">
+    <h2>{{ trans.about.education }}</h2>
+    <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; gap: 2rem;">
+        <div style="flex-shrink: 0;">
+            <img src="{{ url_for('static', filename='photos/snu-logo.jpg') }}" alt="Seoul National University Logo" style="width: 100px; height: 100px; object-fit: contain;">
+        </div>
+        <div style="flex: 1;">
+            <h3>{{ trans.about.master }}</h3>
+            <p><em>Seoul National University, South Korea — Sep 2019 - Aug 2021</em></p>
+            <p>Ms.Eng., Information Technology Management — School of Engineering (GPA: 4.01/4.3)</p>
+        </div>
+    </div>
+    <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 2rem;">
+        <div style="flex-shrink: 0;">
+            <img src="{{ url_for('static', filename='photos/uOfHum-logo.png') }}" alt="University of Humanities Logo" style="width: 100px; height: 100px; object-fit: contain;">
+        </div>
+        <div style="flex: 1;">
+            <h3>{{ trans.about.bachelor }}</h3>
+            <p><em>University of Humanities, Mongolia — 2005 - 2009</em></p>
+            <p>B.Sc., Computer Science, Information Technology Management — Information and Communication Management School</p>
+        </div>
+    </div>
+</section>
+
+<section style="margin-top: 3rem;">
+    <h2>{{ trans.about.languages }}</h2>
+    <ul style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px;">
+        <li>{{ trans.about.mongolian }}</li>
+        <li>{{ trans.about.korean }}</li>
+        <li>{{ trans.about.english }}</li>
+    </ul>
+</section>
+
+<section style="margin-top: 3rem;">
+    <h2>{{ trans.about.awards }}</h2>
+    <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px;">
+        <h3>Awards</h3>
+        <p>Awarded Korean Government Scholarship for Smart City Global Convergence</p>
+        <h3>Publications</h3>
+        <p>Co-authored COVID-19 social network analysis research published in 2020</p>
+    </div>
+</section>
+{% endblock %}

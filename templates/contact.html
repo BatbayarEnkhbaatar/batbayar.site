@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}{{ trans.contact.title }} - Portfolio{% endblock %}
+
+{% block content %}
+<h1>{{ trans.contact.heading }}</h1>
+<p>{{ trans.contact.message }}</p>
+
+<div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2rem;">
+    <div style="flex: 1; min-width: 300px;">
+        <h2>Contact Information</h2>
+        <div style="margin-bottom: 1rem;">
+            <strong>{{ trans.contact.email }}:</strong> mr.btbmangmail.com
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <strong>{{ trans.contact.phone }}:</strong> (+82) 010-3157-9192
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <strong>Location:</strong> 603, 25-32, Deaheak-ro 278 Beon-gil, Sihueng-si, South Korea
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <strong>{{ trans.contact.linkedin }}:</strong> <a href="#" style="color: #0077b5;">linkedin.com/in/batbayar-enkhbaatar</a>
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <strong>{{ trans.contact.github }}:</strong> <a href="#" style="color: #333;">github.com/batbayar-e</a>
+        </div>
+    </div>
+
+    <div style="flex: 1; min-width: 300px;">
+        <h2>Send a Message</h2>
+        <form action="#" method="post" style="display: flex; flex-direction: column; gap: 1rem;">
+            <div>
+                <label for="name" style="display: block; margin-bottom: 0.5rem;">Name</label>
+                <input type="text" id="name" name="name" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+            <div>
+                <label for="email" style="display: block; margin-bottom: 0.5rem;">Email</label>
+                <input type="email" id="email" name="email" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+            <div>
+                <label for="subject" style="display: block; margin-bottom: 0.5rem;">Subject</label>
+                <input type="text" id="subject" name="subject" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+            <div>
+                <label for="message" style="display: block; margin-bottom: 0.5rem;">Message</label>
+                <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; resize: vertical;"></textarea>
+            </div>
+            <button type="submit" style="background-color: #3498db; color: white; padding: 0.75rem; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem;">Send Message</button>
+        </form>
+    </div>
+</div>
+
+<section style="margin-top: 3rem; text-align: center;">
+    <h2>Let's Connect</h2>
+    <p>I'm open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
+</section>
+{% endblock %}

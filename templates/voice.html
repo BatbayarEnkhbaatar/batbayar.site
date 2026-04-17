@@ -1,0 +1,404 @@
+{% extends "base.html" %}
+
+{% block title %}Voice to Text API{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Voice to Text Converter</h1>
+    <p>Click the microphone button to start recording and convert your voice to text.</p>
+    
+    <div class="voice-container">
+        <div class="microphone-section">
+            <button id="startBtn" class="btn btn-primary">🎤 Start Recording</button>
+            <button id="stopBtn" class="btn btn-danger" disabled>⏹️ Stop Recording</button>
+            <button id="resetBtn" class="btn btn-secondary">🔄 Reset</button>
+        </div>
+
+        <div class="status-section">
+            <p id="status" class="status">Ready to record</p>
+            <div class="progress-bar" id="progressBar" style="display: none;"></div>
+        </div>
+
+        <div class="results-section">
+            <h3>Transcript:</h3>
+            <div id="transcript" class="transcript-box">
+                <p id="transcriptText" class="placeholder">Your transcribed text will appear here...</p>
+            </div>
+
+            <h3>Alternative Results:</h3>
+            <div id="alternatives" class="alternatives-box">
+                <p id="alternativesText" class="placeholder">Alternative interpretations will appear here...</p>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>Supported Languages:</h3>
+            <select id="languageSelect">
+                <option value="en-US">English (US)</option>
+                <option value="en-GB">English (UK)</option>
+                <option value="es-ES">Spanish</option>
+                <option value="fr-FR">French</option>
+                <option value="de-DE">German</option>
+                <option value="it-IT">Italian</option>
+                <option value="ja-JP">Japanese</option>
+                <option value="zh-CN">Chinese (Simplified)</option>
+                <option value="hi-IN">Hindi</option>
+                <option value="pt-BR">Portuguese (Brazil)</option>
+            </select>
+
+            <div class="troubleshooting">
+                <h4>⚠️ Troubleshooting:</h4>
+                <p><strong>If you see "not-allowed" error:</strong></p>
+                <ul>
+                    <li>Check that your microphone is connected and working</li>
+                    <li>Reload the page and look for a permission popup from Chrome</li>
+                    <li>If you see a permission popup, click "Allow"</li>
+                    <li>If no popup appears, go to Chrome Settings → Privacy → Site Settings → Microphone and allow this site</li>
+                    <li>Then reload this page and try again</li>
+                </ul>
+                <p><strong>If you see "no-speech" error:</strong></p>
+                <ul>
+                    <li>Speak louder and closer to the microphone</li>
+                    <li>Make sure there's no excessive background noise</li>
+                    <li>Wait at least 2 seconds before stopping the recording</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .voice-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: #f5f5f5;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .microphone-section {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0 5px;
+        transition: all 0.3s ease;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #27ae60;
+        color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+        background-color: #229954;
+        transform: scale(1.05);
+    }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        color: white;
+    }
+
+    .btn-danger:hover:not(:disabled) {
+        background-color: #c0392b;
+    }
+
+    .btn-secondary {
+        background-color: #95a5a6;
+        color: white;
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+        background-color: #7f8c8d;
+    }
+
+    .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .status-section {
+        text-align: center;
+        margin: 1.5rem 0;
+    }
+
+    .status {
+        font-size: 16px;
+        color: #2c3e50;
+        font-weight: bold;
+        padding: 10px;
+        background: white;
+        border-radius: 5px;
+        border-left: 4px solid #27ae60;
+    }
+
+    .progress-bar {
+        height: 6px;
+        background: linear-gradient(90deg, #27ae60, #f39c12, #e74c3c);
+        border-radius: 3px;
+        animation: pulse 1.5s infinite;
+        margin-top: 10px;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.6; }
+    }
+
+    .results-section {
+        margin-top: 2rem;
+    }
+
+    .results-section h3 {
+        color: #2c3e50;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .transcript-box,
+    .alternatives-box {
+        background: white;
+        padding: 15px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        min-height: 60px;
+        word-wrap: break-word;
+    }
+
+    .placeholder {
+        color: #95a5a6;
+        font-style: italic;
+    }
+
+    .info-section {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 2px solid #ddd;
+    }
+
+    #languageSelect {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #bdc3c7;
+        border-radius: 5px;
+        background-color: white;
+        cursor: pointer;
+    }
+
+    #languageSelect:hover {
+        border-color: #27ae60;
+    }
+
+    .browser-support {
+        margin-top: 1rem;
+        padding: 10px;
+        background: #fff3cd;
+        border-radius: 5px;
+        border-left: 4px solid #ffc107;
+    }
+
+    .browser-support p {
+        margin: 0;
+        color: #856404;
+        font-size: 14px;
+    }
+
+    .troubleshooting {
+        margin-top: 1.5rem;
+        padding: 15px;
+        background: #f0f8ff;
+        border-radius: 5px;
+        border-left: 4px solid #3498db;
+    }
+
+    .troubleshooting h4 {
+        margin: 0 0 10px 0;
+        color: #2c3e50;
+    }
+
+    .troubleshooting ul {
+        margin: 10px 0;
+        padding-left: 20px;
+    }
+
+    .troubleshooting li {
+        margin: 5px 0;
+        color: #555;
+        font-size: 14px;
+    }
+
+    .troubleshooting p {
+        margin: 10px 0;
+        color: #555;
+        font-size: 14px;
+    }
+</style>
+
+<script>
+    // Check browser support
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    if (!SpeechRecognition) {
+        document.querySelector('.microphone-section').innerHTML = 
+            '<div class="browser-support"><p>⚠️ Your browser does not support the Web Speech API. Please use Chrome, Edge, or Safari.</p></div>';
+    } else {
+        const recognition = new SpeechRecognition();
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const status = document.getElementById('status');
+        const transcriptText = document.getElementById('transcriptText');
+        const alternativesText = document.getElementById('alternativesText');
+        const progressBar = document.getElementById('progressBar');
+        const languageSelect = document.getElementById('languageSelect');
+
+        let isListening = false;
+        let finalTranscript = '';
+
+        // Configure recognition
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.maxAlternatives = 2;
+
+        // Update language when changed
+        languageSelect.addEventListener('change', (e) => {
+            recognition.lang = e.target.value;
+        });
+
+        // Start recording
+        startBtn.addEventListener('click', () => {
+            finalTranscript = '';
+            recognition.lang = languageSelect.value;
+            
+            try {
+                recognition.start();
+                isListening = true;
+                startBtn.disabled = true;
+                stopBtn.disabled = false;
+                status.textContent = '🎤 Recording... Listening...';
+                status.style.borderLeftColor = '#e74c3c';
+                progressBar.style.display = 'block';
+                transcriptText.classList.remove('placeholder');
+                transcriptText.textContent = 'Listening...';
+                alternativesText.textContent = '';
+            } catch (e) {
+                status.textContent = '❌ Error: ' + e.message;
+                status.style.borderLeftColor = '#e74c3c';
+            }
+        });
+
+        // Stop recording
+        stopBtn.addEventListener('click', () => {
+            isListening = false;
+            recognition.stop();
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+            status.textContent = 'Processing...';
+            progressBar.style.display = 'none';
+        });
+
+        // Reset
+        resetBtn.addEventListener('click', () => {
+            isListening = false;
+            recognition.abort();
+            finalTranscript = '';
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+            status.textContent = 'Ready to record';
+            status.style.borderLeftColor = '#27ae60';
+            progressBar.style.display = 'none';
+            transcriptText.textContent = 'Your transcribed text will appear here...';
+            transcriptText.classList.add('placeholder');
+            alternativesText.textContent = 'Alternative interpretations will appear here...';
+            alternativesText.classList.add('placeholder');
+        });
+
+        // On result
+        recognition.onresult = (event) => {
+            let interimTranscript = '';
+
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                const transcript = event.results[i][0].transcript;
+                
+                if (event.results[i].isFinal) {
+                    finalTranscript += transcript + ' ';
+                } else {
+                    interimTranscript += transcript;
+                }
+            }
+
+            transcriptText.textContent = (finalTranscript + interimTranscript).trim() || 'Listening...';
+
+            // Show alternatives for the last result
+            const lastResult = event.results[event.results.length - 1];
+            if (lastResult.isFinal && lastResult.length > 1) {
+                let altText = 'Alternatives:\n';
+                for (let i = 1; i < Math.min(3, lastResult.length); i++) {
+                    altText += `${i}. ${lastResult[i].transcript}\n`;
+                }
+                alternativesText.textContent = altText;
+                alternativesText.classList.remove('placeholder');
+            }
+        };
+
+        // On start
+        recognition.onstart = () => {
+            status.textContent = '🎤 Recording... Listening...';
+            status.style.borderLeftColor = '#e74c3c';
+        };
+
+        // On end
+        recognition.onend = () => {
+            if (isListening) {
+                // Auto-restart if user hasn't clicked stop
+                try {
+                    recognition.start();
+                } catch (e) {
+                    // Already started, ignore
+                }
+            } else {
+                // User clicked stop
+                status.textContent = '✅ Recognition completed';
+                status.style.borderLeftColor = '#27ae60';
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+            }
+        };
+
+        // On error
+        recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+            
+            let errorMsg = event.error;
+            let fullMsg = `❌ Error: ${event.error}`;
+            
+            if (event.error === 'not-allowed') {
+                fullMsg += ' - Microphone permission denied. Check browser settings!';
+            } else if (event.error === 'no-speech') {
+                fullMsg += ' - No speech detected. Speak louder and try again.';
+            } else if (event.error === 'network') {
+                fullMsg += ' - Network error. Check your internet connection.';
+            } else if (event.error === 'service-not-allowed') {
+                fullMsg += ' - Service not allowed for this page.';
+            }
+            
+            status.textContent = fullMsg;
+            status.style.borderLeftColor = '#e74c3c';
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+            progressBar.style.display = 'none';
+        };
+    }
+</script>
+
+{% endblock %}

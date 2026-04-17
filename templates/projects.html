@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}{{ trans.projects.title }} - Portfolio{% endblock %}
+
+{% block content %}
+<h1>{{ trans.projects.heading }}</h1>
+<p>Here are some of the projects I've worked on. Each one represents a unique challenge and learning experience.</p>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+    <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="SLAM Navigation System" style="width: 100%; height: 200px; object-fit: cover; border-radius: 4px;">
+        <h3>SLAM & Navigation API Integration</h3>
+        <p>Built APIs for data integration with SLAM and navigation modules at 4DiViSION. Ensured security, performance, and scalability for mapping and localization workflows.</p>
+        <div style="margin-top: 1rem;">
+            <span style="background-color: #3498db; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">ROS2</span>
+            <span style="background-color: #3498db; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Python</span>
+            <span style="background-color: #3498db; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">C++</span>
+            <span style="background-color: #3498db; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Cartographer</span>
+        </div>
+        <a href="#" style="display: inline-block; margin-top: 1rem; color: #3498db; text-decoration: none;">View Project →</a>
+    </div>
+
+    <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Physical-AI Robotics Models" style="width: 100%; height: 200px; object-fit: cover; border-radius: 4px;">
+        <h3>Physical-AI Models for Robotics</h3>
+        <p>Developed physical-AI models for robotics at Mila Quebec AI using Gazebo, ROS2, Python, and C++. Optimized middleware communication and secure data pipelines for reinforcement learning.</p>
+        <div style="margin-top: 1rem;">
+            <span style="background-color: #e74c3c; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">ROS2</span>
+            <span style="background-color: #e74c3c; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Gazebo</span>
+            <span style="background-color: #e74c3c; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Python</span>
+            <span style="background-color: #e74c3c; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">C++</span>
+        </div>
+        <a href="#" style="display: inline-block; margin-top: 1rem; color: #e74c3c; text-decoration: none;">View Project →</a>
+    </div>
+
+    <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="DID-Blockchain Backend" style="width: 100%; height: 200px; object-fit: cover; border-radius: 4px;">
+        <h3>DID-Blockchain Trading Platform</h3>
+        <p>Structured a DID-blockchain backend in AWS cloud for a tokenized trading platform at CO2NETWORK INC. Designed RESTful and GraphQL APIs with secure DevOps pipeline.</p>
+        <div style="margin-top: 1rem;">
+            <span style="background-color: #9b59b6; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Node.js</span>
+            <span style="background-color: #9b59b6; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">GraphQL</span>
+            <span style="background-color: #9b59b6; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">AWS</span>
+            <span style="background-color: #9b59b6; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">DynamoDB</span>
+        </div>
+        <a href="#" style="display: inline-block; margin-top: 1rem; color: #9b59b6; text-decoration: none;">View Project →</a>
+    </div>
+
+    <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Data Pipelines for ML" style="width: 100%; height: 200px; object-fit: cover; border-radius: 4px;">
+        <h3>ML Data Pipelines</h3>
+        <p>Architected data pipelines for ML models on AWS and GCP at North Star Consulting using Apache Airflow, BigQuery, and SageMaker. Managed monitoring with Grafana and Prometheus.</p>
+        <div style="margin-top: 1rem;">
+            <span style="background-color: #27ae60; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Apache Airflow</span>
+            <span style="background-color: #27ae60; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">AWS</span>
+            <span style="background-color: #27ae60; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">GCP</span>
+            <span style="background-color: #27ae60; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">TensorFlow</span>
+        </div>
+        <a href="#" style="display: inline-block; margin-top: 1rem; color: #27ae60; text-decoration: none;">View Project →</a>
+    </div>
+</div>
+
+<section style="margin-top: 3rem; text-align: center;">
+    <h2>More Coming Soon</h2>
+    <p>I'm always working on new projects. Check back later for updates!</p>
+</section>
+{% endblock %}
